@@ -295,7 +295,7 @@ public class Muveletek extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    String mentettFajl;
     private void btnEllenorzesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEllenorzesActionPerformed
 
     }//GEN-LAST:event_btnEllenorzesActionPerformed
@@ -320,8 +320,21 @@ public class Muveletek extends javax.swing.JFrame {
                 } catch (IOException ex) {
                     Logger.getLogger(Muveletek.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
         }
+            }
+        /* az 1.mentésnél mentés másként kell*/
+       if(mentettFajl==null){
+        mnuFajlMentActionPerformed(evt);
+       }else{
+            /*továbbiakban a megadott helyre és a megadott néven kell menteni a fájlt */
+        try {
+            /*a tényleges kiiras*/
+            Files.write(Paths.get(mentettFajl), "Statisztika:".getBytes());// hova, mit
+            //tényleges kiiras vége
+        } catch (IOException ex) {
+            Logger.getLogger(Muveletek.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       }
     }//GEN-LAST:event_mnuFajlMentActionPerformed
 
     /*tesztesetek
@@ -387,9 +400,8 @@ public class Muveletek extends javax.swing.JFrame {
             try {                           // vagy sima / per jel
                 /*a tényleges kiirás*/
                 if (mentes) {
-                    Files.write(path, "Statisztika:".getBytes());
+                    Files.write(path, "Statisztika:".getBytes());// hova, mit
                 }
-// hova, mit
                 /*kiiras vége*/
             } catch (IOException ex) {
                 Logger.getLogger(Muveletek.class.getName()).log(Level.SEVERE, null, ex);
