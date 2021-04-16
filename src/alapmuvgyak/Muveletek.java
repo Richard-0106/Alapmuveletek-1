@@ -1,12 +1,16 @@
 package alapmuvgyak;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Muveletek extends javax.swing.JFrame {
 
@@ -320,21 +324,79 @@ public class Muveletek extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnuFajlMentActionPerformed
 
+    /*tesztesetek
+        -kiterjesztés megváltoztatása
+        -olyan kiterjesztés irása, ami nincs a listában
+        -üresen marad a fájl neve
+        -másik mappa kiválasztása
+        -kiterjesztéssel választom a meglévő fájlt akkor megint mmögé írja a kiterjesztést 
+        -létezik a fájl akkor kérdés nélkül felülírja 
+    */
+    
+    
     private void mentesmaskentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mentesmaskentActionPerformed
+       /*fájl nevének és helyének kiválasztása*/
         JFileChooser fc = new JFileChooser(new File("."));
         fc.setDialogTitle("Mentés másként");
-
+        /*választható fájl tipusok beállitása*/
+      fc.setAcceptAllFileFilterUsed(false);
+      
+      FileNameExtensionFilter filter =new FileNameExtensionFilter("PNG ÉS GIF fájlok", "png","gif");
+      fc.addChoosableFileFilter(filter);
+      
+      FileNameExtensionFilter txtfilter =new FileNameExtensionFilter("csak szöveg (*.txt)", "txt");
+      fc.addChoosableFileFilter(txtfilter);
+      
+      FileNameExtensionFilter cspfilter =new FileNameExtensionFilter("sajat (*.csp)", "csp");
+      fc.addChoosableFileFilter(cspfilter);
+      
+      fc.setFileFilter(txtfilter);
+      
+      /*megjelenitjuk a valasztót*/ 
         int valasztottGombErteke = fc.showSaveDialog(this);
+        //ha el akarja menteni
         if (valasztottGombErteke == JFileChooser.APPROVE_OPTION) {
             File f = fc.getSelectedFile();
-
-            lblEredmeny.setText("<html>Elérés:" + f.getPath() + "<br>Fájl neve: " + f.getName() + "</html>");
+           /* int ertek=6;
+            double atlag=(double)ertek/3;*/
+            
+            
+            String[] kit=((FileNameExtensionFilter)fc.getFileFilter()).getExtensions();
+            String fn = f.getPath();     //+"."+kit[0];
+            /*kiterjesztés vizsgálata*/
+            
+            if(!fn.endsWith("."+kit[0])){
+                fn+="."+kit[0];
+            }
+            
+            
+            /*kiterjesztés vizsgálat vége*/
+            Path path=Paths.get(fn);
+            /*létezik e a fájl*/
+            boolean mentes=true;
+            if(Files.exists(path)){
+              valasztottGombErteke=  JOptionPane.showConfirmDialog(this, "felulirja", "a fajl mar letizik",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+                if(valasztottGombErteke==JOptionPane.NO_OPTION){
+                    mentes=false;
+                }
+                        }
+            
+            /*tétezik e a fájl vége*/
+            
+            lblEredmeny.setText("<html>Elérés:" + f.getPath() + "<br>Fájl neve: " + f.getName()+"."+ kit[0]  + "</html>");
             try {                           // vagy sima / per jel
-                Files.write(Paths.get(f.getPath(), "\\stat.txt"), "Statisztika:".getBytes());// hova, mit
+                /*a tényleges kiirás*/
+                if (mentes) {
+                    Files.write(path, "Statisztika:".getBytes());
+                }
+// hova, mit
+                /*kiiras vége*/
             } catch (IOException ex) {
                 Logger.getLogger(Muveletek.class.getName()).log(Level.SEVERE, null, ex);
 
             }
+        }else{
+            JOptionPane.showMessageDialog(this,"A mentés megszakítva","mentés sikertelen",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_mentesmaskentActionPerformed
 
