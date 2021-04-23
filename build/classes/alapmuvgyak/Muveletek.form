@@ -122,14 +122,14 @@
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="pnlGyakorlas" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnUj" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnMegoldas" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="btnMegoldas" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnUj" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -137,10 +137,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <Component id="btnUj" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnMegoldas" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="pnlGyakorlas" min="-2" max="-2" attributes="0"/>
@@ -248,24 +248,38 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblEredmeny" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                          <Component id="lblEredmeny" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblOsszeadKerdes" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblKivonasKerdes" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblOsztasKerdes" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblSzorzasKerdes" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblOsszKerdes" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblOsszeadKerdes" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblKivonasKerdes" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblOsztasKerdes" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblSzorzasKerdes" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace pref="24" max="32767" attributes="0"/>
+                                  <Component id="lblOsszKerdes" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="49" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace pref="31" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="lblKivonasProba" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="lblSzorzasProba" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="lblOsszeadProba" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="lblOsztasProba" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbllblOsszProba" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="lblOsszProba" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -279,7 +293,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblOsszKerdes" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbllblOsszProba" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblOsszProba" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -316,7 +330,7 @@
             <Property name="text" type="java.lang.String" value="&#xd6;ssz k&#xe9;rd&#xe9;sek sz&#xe1;ma: 1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbllblOsszProba">
+        <Component class="javax.swing.JLabel" name="lblOsszProba">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="&#xd6;ssz Prob&#xe1;lkoz&#xe1;sok sz&#xe1;ma: 1"/>
