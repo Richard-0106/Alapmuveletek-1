@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -14,12 +15,20 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Muveletek extends javax.swing.JFrame {
-
+JLabel [] lblTomb;
+    String [] lblTextTomb;
+    String mentettFajl = "";
+    int osszKerdesSzam = 0, osszProbakSzama = 0;
+    int osztasKerdesSzama = 0,szorzasKerdesSzama = 0 ;
+    int osztasProbakSzama = 0, szorzasProbakSzama = 0;
     /**
      * Creates new form Muveletek
      */
     public Muveletek() {
         initComponents();
+         lblTomb = new JLabel[]{lblOsszKerdes, lblOsszProba, lblOsszeadKerdes, lblKivonasKerdes, lblKivonasProba, lblOsztasKerdes, lblOsztasProba, lblSzorzasKerdes, lblSzorzasProba};
+        lblTextTomb = new String[]{"Össz kérdések száma: ","Össz kérdések száma: ","Összeadás: ", "Összeadás: ","Kivonás: ","Kivonás: ","Osztás: ","Osztás: ","Szorzás: ","Szorzás:"};
+   
     }
 
     /**
@@ -310,7 +319,7 @@ public class Muveletek extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    String mentettFajl;
+    
     private void btnEllenorzesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEllenorzesActionPerformed
 
     }//GEN-LAST:event_btnEllenorzesActionPerformed
@@ -424,27 +433,65 @@ public class Muveletek extends javax.swing.JFrame {
     }//GEN-LAST:event_mentesmaskentActionPerformed
 
     private void mnuFajlMegnyitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFajlMegnyitActionPerformed
-        /*fájl neve és kiválasztása*/
-        JFileChooser fc = new JFileChooser(new File("."));         
+         JFileChooser fc = new JFileChooser(new File("."));
         fc.setDialogTitle("Megnyitás");
-        
+
         FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("PNG és GIF fájlok", "png", "gif");
         fc.addChoosableFileFilter(imgFilter);
         FileNameExtensionFilter txtFilter = new FileNameExtensionFilter("Csak szöveg (.txt)", "txt");
         fc.addChoosableFileFilter(txtFilter);
-        FileNameExtensionFilter sgFilter = new FileNameExtensionFilter("saját (.va)", "*va");
+        FileNameExtensionFilter sgFilter = new FileNameExtensionFilter("saját (.sá)", "*sá");
         fc.addChoosableFileFilter(sgFilter);
 
         fc.setFileFilter(txtFilter);
-        
+
         int valasztottGombErteke = fc.showOpenDialog(this);
-        if (valasztottGombErteke == JFileChooser.APPROVE_OPTION) {              
-            File f=fc.getSelectedFile(); 
+        if (valasztottGombErteke == JFileChooser.APPROVE_OPTION) {
+            File f = fc.getSelectedFile();
             String fn = f.getPath();
-            lblEredmeny.setText("<html>Elérés: "+f.getPath()+"<br>Fájl neve:"+f.getName()+"</html>");
-        }
-        else{
-            JOptionPane.showMessageDialog(this,"A megnyitás megszakítva","A mentés sikertelen!",JOptionPane.INFORMATION_MESSAGE);
+            lblEredmeny.setText("<html>Elérés: " + f.getPath() + "<br>Fájl neve:" + f.getName() + "</html>");
+            
+            Path path = Paths.get(fn);
+            try {  
+                
+                //byte[] bajtTomb = Files.readAllBytes(path);
+                List<String> stringLista = Files.readAllLines(path);
+              
+                for (int i = 1; i < stringLista.size(); i++) {
+                    String egySor = stringLista.get(i);
+                    String [] adatok = egySor.split(": ");
+                  egySor = egySor.replaceAll("\\D+", ";");
+                  
+                   // egySor =
+                   
+                   
+                    int t =7;
+                }
+                int lblIndex = 0;
+                for (int i = 1; i < stringLista.size(); i++) {
+                    String egySor = stringLista.get(i);
+                    String[] adatok = egySor.split(":");
+                    JLabel lbl = lblTomb[lblIndex+1];
+                    lbl.setText(lblTextTomb[lblIndex+1] + adatok[2]);
+                    adatok = adatok[1].split(" ");
+                    lbl = lblTomb[lblIndex];
+                    lbl.setText(lblTextTomb[lblIndex]+adatok[0]);
+                    lblIndex +=2;
+                }
+                /*String egySor = stringLista.get(1);
+                String[] adatok = egySor.split(":");
+              
+                String masodikSor = adatok[1];
+                String[] elso = masodikSor.split(" ");
+                String szam1 =elso[0];
+                
+                */
+                
+            } catch (IOException ex) {
+                Logger.getLogger(Muveletek.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "A megnyitás megszakítva", "A mentés sikertelen!", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_mnuFajlMegnyitActionPerformed
 
@@ -529,7 +576,6 @@ public class Muveletek extends javax.swing.JFrame {
 //        statisztika +=lblOsszeadKerdes.getText()+"\n";
 //        statisztika +=lblOsszeadProba.getText()+"\n";
 //                                i:0       0                0+1               2
-        JLabel[] lbltomb = new JLabel[] {lblOsszKerdes,lblOsszProba, lblOsszeadKerdes,lblOsszeadProba,lblKivonasKerdes,lblKivonasProba,lblSzorzasKerdes,lblSzorzasProba,lblOsztasKerdes,lblOsztasProba};
 //        for (JLabel lbl : lbltomb) {
 //            statisztika += lbl.getText() +"\n";
 //        }
